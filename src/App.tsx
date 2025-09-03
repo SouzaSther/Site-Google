@@ -78,7 +78,7 @@ function App() {
               visitantes em clientes fiéis. Chega de site que não gera
               resultado. Com a{" "}
               <span className="text-orange-500 font-bold">Centralizou</span>,
-              seu site novo em gera os resultados que você merece.
+              seu site novo gera os resultados que você merece.
             </p>
           </div>
 
