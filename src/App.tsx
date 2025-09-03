@@ -446,42 +446,52 @@ function App() {
 
           <div className="mt-8 text-gray-400">
             <p>⚡ Resposta em até 1 hora nos dias úteis</p>
-            <p>✅ Consultoria inicial 100% gratuita</p>
+            <p>✅ Dúvidas iniciais 100% gratuitas</p>
             <p>🎯 Metodologia comprovada</p>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <Phone className="w-8 h-8 text-orange-500 mx-auto mb-2" />
-              <p className="text-gray-300">(13) 99175-2901</p>
+      <footer className="bg-black text-white pt-12 pb-8 px-4">
+        <div className="max-w-5xl mx-auto flex flex-col items-center">
+          <img
+            src={logo}
+            style={{ width: "17rem" }}
+            alt="Centralizou Logo"
+            className="h-auto mb-4 drop-shadow-lg"
+          />
+          <p className="text-lg font-semibold text-gray-50 mb-6 text-center">
+            Centralizando resultados, maximizando vendas.
+          </p>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full mb-6">
+            <div
+              onClick={() =>
+                window.open(
+                  "https://wa.me/5513991752901?text=Olá,%20gostaria%20de%20falar%20com%20vocês",
+                  "_blank"
+                )
+              }
+              className="flex items-center gap-2 md:gap-3 mb-4 md:mb-0"
+              role="button"
+            >
+              <Phone className="w-6 h-6 text-orange-400" />
+              <span className="text-gray-300 text-base">(13) 99175-2901</span>
             </div>
-            <div>
-              <Mail className="w-8 h-8 text-orange-500 mx-auto mb-2" />
-              <p className="text-gray-300">contato@centralizou.com</p>
+            <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-0">
+              <Mail className="w-6 h-6 text-orange-400" />
+              <span className="text-gray-300 text-base">
+                contato@centralizou.com
+              </span>
             </div>
-            <div>
-              <MapPin className="w-8 h-8 text-orange-500 mx-auto mb-2" />
-              <p className="text-gray-300">São Paulo, SP</p>
+            <div className="flex items-center gap-2 md:gap-3">
+              <MapPin className="w-6 h-6 text-orange-400" />
+              <span className="text-gray-300 text-base">São Paulo, SP</span>
             </div>
           </div>
-
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <img
-              src={logo}
-              alt="Centralizou Logo"
-              className="w-72 h-auto mx-auto mb-3"
-            />
-            <p className="text-gray-400">
-              Centralizando resultados, maximizando vendas.
-              <br />
-              © 2025 Centralizou.
-              <br />
-              Todos os direitos reservados.
+          <div className="w-full border-t border-gray-800 pt-4 text-center mb-5">
+            <p className="text-xs text-gray-500">
+              © 2025 Centralizou. Todos os direitos reservados.
             </p>
           </div>
         </div>
