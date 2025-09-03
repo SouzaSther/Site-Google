@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://centralizou.com/sitemap.xml
+
+# Performance and SEO optimization
+Crawl-delay: 1
+
+# Block unwanted paths (if any)
+# Disallow: /admin/
+# Disallow: /private/

@@ -15,6 +15,7 @@ import {
   MapPin,
 } from "lucide-react";
 import logo from "../logo.png";
+import { trackWhatsAppClick, useScrollTracking } from "./utils/analytics";
 
 function App() {
   const [timeLeft, setTimeLeft] = useState({
@@ -23,6 +24,9 @@ function App() {
     minutes: 32,
     seconds: 45,
   });
+
+  // Track scroll depth for engagement
+  useScrollTracking();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,16 +53,18 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
-  const scrollToCTA = () => {
-    document
-      .getElementById("cta-section")
-      ?.scrollIntoView({ behavior: "smooth" });
+  const handleWhatsAppClick = (location: string) => {
+    trackWhatsAppClick(location);
+    window.open(
+      "https://wa.me/5513991752901?text=Olá,%20gostaria%20de%20falar%20com%20vocês",
+      "_blank"
+    );
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
       {/* Header/Hero Section */}
-      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-20 px-4">
+      <header className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <div className="mb-8">
             <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
@@ -77,24 +83,26 @@ function App() {
           </div>
 
           <button
-            onClick={() =>
-              window.open(
-                "https://wa.me/5513991752901?text=Olá,%20gostaria%20de%20falar%20com%20vocês",
-                "_blank"
-              )
-            }
+            onClick={() => handleWhatsAppClick("hero")}
             className="bg-orange-500 hover:bg-orange-600 text-white text-xl font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+            aria-label="Solicitar orçamento via WhatsApp"
           >
             QUERO UM SITE QUE VENDE AGORA
           </button>
         </div>
-      </section>
+      </header>
 
       {/* Pain Points Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section
+        className="py-20 px-4 bg-gray-50"
+        aria-labelledby="pain-points-heading"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+            <h2
+              id="pain-points-heading"
+              className="text-4xl md:text-5xl font-black text-gray-900 mb-6"
+            >
               Isso soa <span className="text-red-500">familiar</span> para você?
             </h2>
             <p className="text-xl text-gray-600">
@@ -141,26 +149,34 @@ function App() {
                   "Você perde oportunidades de negócio todos os dias por não ter presença online?",
               },
             ].map((pain, index) => (
-              <div
+              <article
                 key={index}
                 className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300"
               >
-                <div className="mb-4">{pain.icon}</div>
+                <div className="mb-4" aria-hidden="true">
+                  {pain.icon}
+                </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {pain.title}
                 </h3>
                 <p className="text-gray-600">{pain.description}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* Solution Section */}
-      <section className="py-20 px-4 bg-white">
+      <section
+        className="py-20 px-4 bg-white"
+        aria-labelledby="solutions-heading"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+            <h2
+              id="solutions-heading"
+              className="text-4xl md:text-5xl font-black text-gray-900 mb-6"
+            >
               A <span className="text-orange-500">Centralizou</span> é a chave
               para você
               <br />
@@ -211,28 +227,36 @@ function App() {
                   "Nossa equipe te acompanha desde o briefing até o lançamento e além.",
               },
             ].map((solution, index) => (
-              <div
+              <article
                 key={index}
                 className="bg-gray-50 p-8 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100"
               >
-                <div className="mb-6">{solution.icon}</div>
+                <div className="mb-6" aria-hidden="true">
+                  {solution.icon}
+                </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
                   {solution.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
                   {solution.description}
                 </p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* Social Proof Section */}
-      <section className="py-20 px-4 bg-gray-900 text-white">
+      <section
+        className="py-20 px-4 bg-gray-900 text-white"
+        aria-labelledby="testimonials-heading"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-6">
+            <h2
+              id="testimonials-heading"
+              className="text-4xl md:text-5xl font-black mb-6"
+            >
               Resultados <span className="text-orange-500">Reais</span> de quem
               <br />
               confiou na Centralizou
@@ -269,29 +293,35 @@ function App() {
                 result: "2° página no Google",
               },
             ].map((testimonial, index) => (
-              <div
+              <article
                 key={index}
                 className="bg-gray-800 p-8 rounded-xl border border-gray-700"
               >
-                <div className="flex mb-4">
+                <div
+                  className="flex mb-4"
+                  aria-label={`Avaliação: ${testimonial.rating} estrelas`}
+                >
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star
                       key={i}
                       className="w-5 h-5 text-yellow-400 fill-current"
+                      aria-hidden="true"
                     />
                   ))}
                 </div>
-                <p className="text-gray-300 mb-6 italic">
+                <blockquote className="text-gray-300 mb-6 italic">
                   "{testimonial.testimony}"
-                </p>
+                </blockquote>
                 <div className="border-t border-gray-700 pt-4">
-                  <p className="font-bold text-white">{testimonial.name}</p>
+                  <cite className="font-bold text-white not-italic">
+                    {testimonial.name}
+                  </cite>
                   <p className="text-gray-400">{testimonial.company}</p>
                   <p className="text-green-400 font-bold mt-2">
                     {testimonial.result}
                   </p>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -307,13 +337,9 @@ function App() {
             Agende uma consultoria gratuita e sem compromisso
           </p>
           <button
-            onClick={() =>
-              window.open(
-                "https://wa.me/5513991752901?text=Olá,%20gostaria%20de%20falar%20com%20vocês",
-                "_blank"
-              )
-            }
+            onClick={() => handleWhatsAppClick("intermediate-cta")}
             className="bg-white text-orange-500 text-xl font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            aria-label="Falar com especialista via WhatsApp"
           >
             FALAR COM UM ESPECIALISTA AGORA
           </button>
@@ -403,13 +429,9 @@ function App() {
           </div>
 
           <button
-            onClick={() =>
-              window.open(
-                "https://wa.me/5513991752901?text=Olá,%20gostaria%20de%20falar%20com%20vocês",
-                "_blank"
-              )
-            }
+            onClick={() => handleWhatsAppClick("urgency-offer")}
             className="bg-yellow-400 text-black text-xl font-bold py-4 px-8 rounded-full hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            aria-label="Garantir vaga via WhatsApp"
           >
             GARANTIR MINHA VAGA AGORA
           </button>
@@ -432,13 +454,9 @@ function App() {
             tudo.
           </p>
           <button
-            onClick={() =>
-              window.open(
-                "https://wa.me/5513991752901?text=Olá,%20gostaria%20de%20falar%20com%20vocês",
-                "_blank"
-              )
-            }
+            onClick={() => handleWhatsAppClick("final-cta")}
             className="bg-orange-500 hover:bg-orange-600 text-white text-2xl font-bold py-6 px-12 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center mx-auto"
+            aria-label="Centralizar vendas via WhatsApp"
           >
             QUERO CENTRALIZAR MINHAS VENDAS AGORA
             <ChevronRight className="w-8 h-8 ml-2" />
@@ -458,34 +476,39 @@ function App() {
           <img
             src={logo}
             style={{ width: "17rem" }}
-            alt="Centralizou Logo"
+            alt="Centralizou - Criação de Sites Profissionais"
             className="h-auto mb-4 drop-shadow-lg"
+            loading="lazy"
+            width="272"
+            height="auto"
           />
           <p className="text-lg font-semibold text-gray-50 mb-6 text-center">
             Centralizando resultados, maximizando vendas.
           </p>
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full mb-6">
             <div
-              onClick={() =>
-                window.open(
-                  "https://wa.me/5513991752901?text=Olá,%20gostaria%20de%20falar%20com%20vocês",
-                  "_blank"
-                )
-              }
-              className="flex items-center gap-2 md:gap-3 mb-4 md:mb-0"
+              onClick={() => handleWhatsAppClick("footer")}
+              className="flex items-center gap-2 md:gap-3 mb-4 md:mb-0 cursor-pointer hover:text-orange-400 transition-colors"
               role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  handleWhatsAppClick("footer");
+                }
+              }}
+              aria-label="Entrar em contato via telefone"
             >
-              <Phone className="w-6 h-6 text-orange-400" />
+              <Phone className="w-6 h-6 text-orange-400" aria-hidden="true" />
               <span className="text-gray-300 text-base">(13) 99175-2901</span>
             </div>
             <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-0">
-              <Mail className="w-6 h-6 text-orange-400" />
+              <Mail className="w-6 h-6 text-orange-400" aria-hidden="true" />
               <span className="text-gray-300 text-base">
                 contato@centralizou.com
               </span>
             </div>
             <div className="flex items-center gap-2 md:gap-3">
-              <MapPin className="w-6 h-6 text-orange-400" />
+              <MapPin className="w-6 h-6 text-orange-400" aria-hidden="true" />
               <span className="text-gray-300 text-base">São Paulo, SP</span>
             </div>
           </div>
@@ -496,7 +519,7 @@ function App() {
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
 
