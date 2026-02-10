@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   CheckCircle,
   AlertTriangle,
@@ -13,6 +13,8 @@ import {
   Phone,
   Mail,
   MapPin,
+  Zap,
+  Award,
 } from "lucide-react";
 import logo from "../logo.png";
 import { trackWhatsAppClick, useScrollTracking } from "./utils/analytics";
@@ -392,8 +394,9 @@ function App() {
           </div>
 
           <div className="bg-black bg-opacity-50 rounded-2xl p-8 mb-8">
-            <p className="text-xl mb-4">
-              ⏰ Tempo restante para garantir sua vaga:
+            <p className="text-xl mb-4 flex items-center justify-center gap-2">
+              <Clock className="w-5 h-5" aria-hidden="true" />
+              Tempo restante para garantir sua vaga:
             </p>
             <div className="flex justify-center space-x-8">
               <div className="text-center">
@@ -423,9 +426,8 @@ function App() {
             </div>
           </div>
 
-          <div className="text-2xl font-bold mb-8">
-            🔥 Restam apenas <span className="text-yellow-300">3 vagas</span>!
-            🔥
+          <div className="text-2xl font-bold mb-8 flex items-center justify-center gap-2">
+            Restam apenas <span className="text-yellow-300">3 vagas</span>!
           </div>
 
           <button
@@ -462,33 +464,45 @@ function App() {
             <ChevronRight className="w-8 h-8 ml-2" />
           </button>
 
-          <div className="mt-8 text-gray-400">
-            <p>⚡ Resposta em até 1 hora nos dias úteis</p>
-            <p>✅ Dúvidas iniciais 100% gratuitas</p>
-            <p>🎯 Metodologia comprovada</p>
+          <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-6 text-gray-400">
+            <span className="flex items-center gap-2">
+              <Zap className="w-4 h-4 text-orange-400" aria-hidden="true" />
+              Resposta em até 1 hora nos dias úteis
+            </span>
+            <span className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
+              Dúvidas iniciais 100% gratuitas
+            </span>
+            <span className="flex items-center gap-2">
+              <Award className="w-4 h-4 text-orange-400" aria-hidden="true" />
+              Metodologia comprovada
+            </span>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white pt-12 pb-8 px-4">
-        <div className="max-w-5xl mx-auto flex flex-col items-center">
-          <img
-            src={logo}
-            style={{ width: "17rem" }}
-            alt="Centralizou - Criação de Sites Profissionais"
-            className="h-auto mb-4 drop-shadow-lg"
-            loading="lazy"
-            width="272"
-            height="auto"
-          />
-          <p className="text-lg font-semibold text-gray-50 mb-6 text-center">
-            Centralizando resultados, maximizando vendas.
-          </p>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full mb-6">
+      <footer className="bg-gray-900 text-white border-t border-gray-800">
+        <div className="max-w-5xl mx-auto px-4 pt-12 pb-6">
+          <div className="flex flex-col items-center mb-8">
+            <img
+              src={logo}
+              style={{ width: "14rem" }}
+              alt="Centralizou - Criação de Sites Profissionais"
+              className="h-auto mb-3"
+              loading="lazy"
+              width="224"
+              height="auto"
+            />
+            <p className="text-sm text-gray-400 text-center">
+              Centralizando resultados, maximizando vendas.
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-8">
             <div
               onClick={() => handleWhatsAppClick("footer")}
-              className="flex items-center gap-2 md:gap-3 mb-4 md:mb-0 cursor-pointer hover:text-orange-400 transition-colors"
+              className="flex items-center gap-2 cursor-pointer text-gray-300 hover:text-orange-400 transition-colors"
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -498,23 +512,22 @@ function App() {
               }}
               aria-label="Entrar em contato via telefone"
             >
-              <Phone className="w-6 h-6 text-orange-400" aria-hidden="true" />
-              <span className="text-gray-300 text-base">(13) 99175-2901</span>
+              <Phone className="w-5 h-5 text-orange-500" aria-hidden="true" />
+              <span className="text-sm">(13) 99175-2901</span>
             </div>
-            <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-0">
-              <Mail className="w-6 h-6 text-orange-400" aria-hidden="true" />
-              <span className="text-gray-300 text-base">
-                contato@centralizou.com
-              </span>
+            <div className="flex items-center gap-2 text-gray-300">
+              <Mail className="w-5 h-5 text-orange-500" aria-hidden="true" />
+              <span className="text-sm">contato@centralizou.com</span>
             </div>
-            <div className="flex items-center gap-2 md:gap-3">
-              <MapPin className="w-6 h-6 text-orange-400" aria-hidden="true" />
-              <span className="text-gray-300 text-base">São Paulo, SP</span>
+            <div className="flex items-center gap-2 text-gray-300">
+              <MapPin className="w-5 h-5 text-orange-500" aria-hidden="true" />
+              <span className="text-sm">São Paulo, SP</span>
             </div>
           </div>
-          <div className="w-full border-t border-gray-800 pt-4 text-center mb-5">
+
+          <div className="border-t border-gray-800 pt-5 text-center">
             <p className="text-xs text-gray-500">
-              © 2025 Centralizou. Todos os direitos reservados.
+              &copy; {new Date().getFullYear()} Centralizou. Todos os direitos reservados.
             </p>
           </div>
         </div>
