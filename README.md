@@ -4,6 +4,7 @@
 
 ![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-4.x-646CFF?logo=vite)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.x-38B2AC?logo=tailwind-css)
 ![SEO](https://img.shields.io/badge/SEO-Optimized-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
