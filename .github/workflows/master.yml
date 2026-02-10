@@ -24,4 +24,4 @@ jobs:
           key: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
           overwrite: true
           source: "./dist/*"
-          target: "/home/ubuntu/mo/portfolio/landing-page-minimalista"
+          target: "/home/ubuntu/mo/portfolio/site-google"
