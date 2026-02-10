@@ -24,8 +24,10 @@ Site de vendas **otimizado para SEO, performance e produção**, pronto para **d
 
 ---
 
-## ▶️ Executar localmente
+## 🛠️ Instalação
 
 ```bash
+git clone https://github.com/SouzaSther/Site-Google.git
+cd Site-Google
 npm install
 npm run dev
